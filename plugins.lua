@@ -40,6 +40,7 @@ return {
 
     {
         "williamboman/mason.nvim",
+        event = "VeryLazy",
         dependencies = {
             'WhoIsSethDaniel/mason-tool-installer.nvim',
             main = 'mason-tool-installer',
@@ -60,6 +61,7 @@ return {
                 },
             },
         },
+        run_on_start = true,
         main = "mason",
     },
 

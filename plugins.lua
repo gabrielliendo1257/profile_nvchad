@@ -40,11 +40,17 @@ return {
 
     {
         "williamboman/mason.nvim",
-        event = "VeryLazy",
         dependencies = {
             'WhoIsSethDaniel/mason-tool-installer.nvim',
-            main = 'mason-tool-installer',
-            opts = {
+        },
+        main = "mason",
+    },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        main = 'mason-tool-installer',
+        event = "VeryLazy",
+        config = function()
+            require("mason-tool-installer").setup({
                 ensure_installed = {
                     'prettier', -- prettier formatter
                     -- 'stylua', -- lua formatter
@@ -59,10 +65,18 @@ return {
                     'jdtls',
                     'debugpy',
                 },
-            },
-        },
-        run_on_start = true,
-        main = "mason",
+                run_on_start = true,
+            })
+
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'MasonToolsStartingInstall',
+                callback = function()
+                    vim.schedule(function()
+                        vim.notify('🔧 mason-tool-installer is starting...', vim.log.levels.INFO)
+                    end)
+                end,
+            })
+        end,
     },
 
     -- Testing

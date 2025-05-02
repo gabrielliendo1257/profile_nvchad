@@ -37,46 +37,31 @@ return {
         end
     },
 
-
     {
-        "williamboman/mason.nvim",
+        'williamboman/mason.nvim',
+        lazy = false,
         dependencies = {
-            'WhoIsSethDaniel/mason-tool-installer.nvim',
-        },
-        main = "mason",
-    },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        main = 'mason-tool-installer',
-        event = "VeryLazy",
-        config = function()
-            require("mason-tool-installer").setup({
-                ensure_installed = {
-                    'prettier', -- prettier formatter
-                    -- 'stylua', -- lua formatter
-                    -- 'isort', -- python formatter
-                    'black',    -- python formatter
-                    'mypy',     -- python linter
-                    'eslint_d', -- js linter
-                    'pyright',
-                    -- 'lua-language-server',
-                    'java-test',
-                    'java-debug-adapter',
-                    'jdtls',
-                    'debugpy',
+            {
+                'WhoIsSethDaniel/mason-tool-installer.nvim',
+                main = 'mason-tool-installer',
+                opts = {
+                    ensure_installed = {
+                        'prettier', -- prettier formatter
+                        'stylua', -- lua formatter
+                        -- 'isort', -- python formatter
+                        'black', -- python formatter
+                        'mypy', -- python linter
+                        'eslint_d', -- js linter
+                        'pyright',
+                        'lua-language-server',
+                        'java-test',
+                        'java-debug-adapter',
+                        'jdtls',
+                    },
                 },
-                run_on_start = true,
-            })
-
-            vim.api.nvim_create_autocmd('User', {
-                pattern = 'MasonToolsStartingInstall',
-                callback = function()
-                    vim.schedule(function()
-                        vim.notify('🔧 mason-tool-installer is starting...', vim.log.levels.INFO)
-                    end)
-                end,
-            })
-        end,
+            },
+        },
+        main = 'mason',
     },
 
     -- Testing

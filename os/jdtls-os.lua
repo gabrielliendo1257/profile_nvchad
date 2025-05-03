@@ -5,21 +5,23 @@ local mason_registry = require 'mason-registry'
 local jdtls = mason_registry.get_package 'jdtls'
 local jdtls_path = jdtls:get_install_path()
 
+---@return string
+M.get_launcher = function ()
+    return vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
+end
+
+---@return string
+M.get_lombok = function ()
+    return jdtls_path .. '/lombok.jar'
+end
+
 if utils.is_windows then
-    M.get_launcher = function()
-        -- Obtain the path to the jar which runs the language server
-        local launcher = vim.fn.glob(jdtls_path ..
-            '/plugins/org.eclipse.equinox.launcher_*.jar')
-
-        return launcher
+    M.get_path_config_system = function()
+        return jdtls_path .. '/config_win'
     end
-
-    M.get_config_system = function()
-        return jdtls_path .. "/config_win"
-    end
-
-    M.get_lombok = function()
-        return jdtls_path .. "/../lombok-nightly" .. "/lombok.jar"
+else
+    M.get_path_config_system = function()
+        return jdtls_path .. '/config_linux'
     end
 end
 

@@ -4,7 +4,7 @@ local function get_jdtls()
     local jdtls_os = require("custom.os.jdtls-os")
     -- vim.notify("launcher ".."config ".." lombok"..launcher .. " " .. config .. " " .. lombok)
 
-    return jdtls_os.get_launcher(), jdtls_os.get_config_system(), jdtls_os.get_lombok()
+    return jdtls_os.get_launcher(), jdtls_os.get_path_config_system(), jdtls_os.get_lombok()
 end
 
 local function get_bundles()

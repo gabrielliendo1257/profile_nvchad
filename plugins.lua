@@ -138,9 +138,10 @@ return {
         },
         config = function(_, _)
             local dap_python = require("dap-python")
+            local debugpy_os = require("custom.os.debugpy-os")
 
             -- Instala debugpy con Mason o manualmente
-            dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/Scripts/python")
+            dap_python.setup(debugpy_os.get_path_debugpy())
 
             -- Opcional: configuración extra
             dap_python.test_runner = "pytest"
@@ -352,7 +353,6 @@ return {
                     },
                 },
                 opts = {
-                    background_colour = "#000000",
                     timeout = 3000,
                     max_height = function()
                         return math.floor(vim.o.lines * 0.75)

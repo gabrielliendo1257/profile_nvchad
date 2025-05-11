@@ -5,7 +5,6 @@ local M = {}
 
 M.ui = {
   theme = "doomchad",
-  transparency = true,
   theme_toggle = { "doomchad", "one_light" },
   lsp_semantic_tokens = true,
   -- hl_override = highlights.override,

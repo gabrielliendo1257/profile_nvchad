@@ -50,10 +50,10 @@ lspconfig_package.pyright.setup({
                 diagnosticMode = "workspace",
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
-                stubPath = vim.fn.stdpath("data") .. "/pyright-stubs",
-                extraPaths = {
-                    vim.fn.expand("~/.local/lib/python3.*/site-packages"),
-                },
+                -- stubPath = vim.fn.stdpath("data") .. "/pyright-stubs",
+                -- extraPaths = {
+                --     vim.fn.expand("~/.local/lib/python3.*/site-packages"),
+                -- },
             }
         }
     }

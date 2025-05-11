@@ -26,7 +26,7 @@ return {
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
     { '<leader>cr', vim.lsp.buf.rename,                                         desc = '[R]e[n]ame',              mode = 'n', silent = true },
-    { '<leader>cf', vim.diagnostic.open_float,                                  desc = '[D]iagnostic float',      mode = 'n', silent = true },
+    { '<leader>cF', vim.diagnostic.open_float,                                  desc = '[D]iagnostic float',      mode = 'n', silent = true },
 
     -- Execute a code action, usually your cursor needs to be on top of an error
     -- or a suggestion from your LSP for this to activate.

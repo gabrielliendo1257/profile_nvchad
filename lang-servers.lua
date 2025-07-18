@@ -58,3 +58,15 @@ lspconfig_package.pyright.setup({
         }
     }
 })
+
+lspconfig_package.clangd.setup({
+    capabilities = lspconfig_commons.capabilities,
+})
+
+-- vim.lsp.enable('angularls')
+
+lspconfig_package.angularls.setup {}
+
+-- lspconfig_package.ts_ls.setup({
+--     capabilities = lspconfig_commons.capabilities,
+-- })

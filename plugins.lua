@@ -63,8 +63,24 @@ return {
         },
         main = 'mason',
     },
+    {
+        "folke/todo-comments.nvim",
+        event = "VimEnter",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = { signs = false }
+    },
 
     -- Testing
+    {
+        "rcasia/neotest-java",
+        ft = "java",
+        dependencies = {
+            "mfussenegger/nvim-jdtls",
+            "mfussenegger/nvim-dap",           -- for the debugger
+            "rcarriga/nvim-dap-ui",            -- recommended
+            "theHamsta/nvim-dap-virtual-text", -- recommended
+        },
+    },
     {
         "nvim-neotest/neotest",
         dependencies = {
@@ -72,19 +88,35 @@ return {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
+            "rcasia/neotest-java",
             "nvim-neotest/neotest-python"
         },
         opts = function()
+            local dap_python = require("dap-python")
+
+            -- Opcional: configuración extra
+            dap_python.test_runner = "pytest"
             local adapters = {
                 require("neotest-python")({
                     dap = { justMyCode = false },
                     runner = "pytest",
+                }),
+                require("neotest-java")({
+                    runner = "java-test"
                 }),
             }
 
             return adapters
         end,
         main = "neotest",
+    },
+
+    {
+        "ellisonleao/carbon-now.nvim",
+        lazy = true,
+        cmd = "CarbonNow",
+        main = "carbon-now",
+        config = true
     },
 
     -- DAP

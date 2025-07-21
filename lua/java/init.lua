@@ -7,7 +7,7 @@ return {
         main = 'jdtls',
         config = function(plugin, _)
             -- local jdtls_config = require 'custom.config.jdtls'
-    require("java")
+    require("lsp.lsp_core")
     local jdtls = JdtlsConfiguration:new()
     local config = jdtls:factory_lsp_plugin()
 

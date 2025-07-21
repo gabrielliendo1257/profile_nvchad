@@ -1,9 +1,9 @@
-vim.opt.rtp:append(".")
-
-require("my_plugin.core.lsp")
-
-local jdtls = JdtlsConfiguration:new()
-print(vim.inspect(jdtls:factory_lsp_plugin()))
+-- vim.opt.rtp:append(".")
+--
+-- require("my_plugin.core.lsp")
+--
+-- local jdtls = JdtlsConfiguration:new()
+-- print(vim.inspect(jdtls:factory_lsp_plugin()))
 
 -- local spec = {
 --         'mfussenegger/nvim-jdtls',

@@ -24,11 +24,11 @@ JdtlsConfiguration.__index = JdtlsConfiguration
 
 function JdtlsConfiguration:new()
 
-  local obj_base = AbstractLsp:new()
-  local obj = setmetatable(obj_base, self)
-  obj.java_debug_path = self.mason_packages .. "/java-debug-adapter"
-  obj.java_test_path = self.mason_packages .. "/java-test"
-  obj.jdtls_path = self.mason_packages .. "/jdtls"
+  local obj_base = AbstractLsp.new(self)
+  local obj = setmetatable({}, self)
+  obj.java_debug_path = obj_base.mason_packages .. "/java-debug-adapter"
+  obj.java_test_path = obj_base.mason_packages .. "/java-test"
+  obj.jdtls_path = obj_base.mason_packages .. "/jdtls"
 
   obj.main_config = {}
 

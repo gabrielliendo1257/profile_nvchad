@@ -1,14 +1,13 @@
-local lspconfig_package = require("lspconfig")
-local lspconfig_commons = require("plugins.configs.lspconfig")
-local util = require("lspconfig.util")
+local lspconfig_package = require "lspconfig"
+local lspconfig_commons = require "plugins.configs.lspconfig"
+local util = require "lspconfig.util"
 
-
-lspconfig_package.pyright.setup({
+lspconfig_package.pyright.setup {
     on_init = function(client)
         -- Puedes modificar la configuración en tiempo de ejecución aquí si lo necesitas
         -- Por ejemplo, cambiar settings si no hay `pyrightconfig.json`
         local path = client.workspace_folders and client.workspace_folders[1].name or nil
-        if path and not vim.loop.fs_stat(path .. '/pyrightconfig.json') then
+        if path and not vim.loop.fs_stat(path .. "/pyrightconfig.json") then
             client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
                 python = {
                     analysis = {
@@ -16,8 +15,8 @@ lspconfig_package.pyright.setup({
                         autoSearchPaths = true,
                         useLibraryCodeForTypes = true,
                         diagnosticMode = "workspace", -- o "openFilesOnly"
-                    }
-                }
+                    },
+                },
             })
         end
     end,
@@ -26,13 +25,9 @@ lspconfig_package.pyright.setup({
 
     root_dir = function(fname)
         -- Busca pyproject.toml, setup.py, requirements.txt, o carpeta .git
-        return util.root_pattern(
-            'pyrightconfig.json',
-            'pyproject.toml',
-            'setup.py',
-            'requirements.txt',
-            '.git'
-        )(fname) or util.find_git_ancestor(fname) or vim.loop.cwd()
+        return util.root_pattern("pyrightconfig.json", "pyproject.toml", "setup.py", "requirements.txt", ".git")(fname)
+            or util.find_git_ancestor(fname)
+            or vim.loop.cwd()
     end,
 
     single_file_support = true,
@@ -54,19 +49,51 @@ lspconfig_package.pyright.setup({
                 -- extraPaths = {
                 --     vim.fn.expand("~/.local/lib/python3.*/site-packages"),
                 -- },
-            }
-        }
-    }
-})
+            },
+        },
+    },
+}
 
-lspconfig_package.clangd.setup({
+lspconfig_package.clangd.setup {
     capabilities = lspconfig_commons.capabilities,
-})
+}
 
 -- vim.lsp.enable('angularls')
 
 lspconfig_package.angularls.setup {}
 
+lspconfig_package.ts_ls.setup {
+    capabilities = lspconfig_commons.capabilities,
+    settings = {
+        typescript = {
+            tsserver = {
+                useSintaxServer = false,
+            },
+            inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+            includeCompletionsForModuleExports = true,
+            quotePreference = "auto",
+        },
+    },
+}
+
 -- lspconfig_package.ts_ls.setup({
 --     capabilities = lspconfig_commons.capabilities,
 -- })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function(args)
+        require("conform").format {
+            bufnr = args.buf,
+        }
+    end,
+})

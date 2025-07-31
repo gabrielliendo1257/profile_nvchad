@@ -4,9 +4,12 @@ local M = {}
 -- local highlights = require "custom.highlights"
 
 M.ui = {
-    theme = "doomchad",
-    transparency = true,
-    theme_toggle = { "doomchad", "one_light" },
+    theme = "ayu_dark",
+    -- transparency = true,
+    theme_toggle = { "catppuccin" },
+    nvdash = {
+        load_on_startup = true
+    },
     lsp_semantic_tokens = true,
     -- hl_override = highlights.override,
     -- hl_add = highlights.add,

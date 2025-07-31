@@ -48,9 +48,9 @@ return {
                     ensure_installed = {
                         'prettier', -- prettier formatter
                         -- 'stylua', -- lua formatter
-                        -- 'isort', -- python formatter
-                        'black',    -- python formatter
-                        'mypy',     -- python linter
+                        'isort', -- python formatter
+                        'black', -- python formatter
+                        'mypy', -- python linter
                         'eslint_d', -- js linter
                         'pyright',
                         -- 'lua-language-server',
@@ -76,8 +76,8 @@ return {
         ft = "java",
         dependencies = {
             "mfussenegger/nvim-jdtls",
-            "mfussenegger/nvim-dap",           -- for the debugger
-            "rcarriga/nvim-dap-ui",            -- recommended
+            "mfussenegger/nvim-dap",     -- for the debugger
+            "rcarriga/nvim-dap-ui",      -- recommended
             "theHamsta/nvim-dap-virtual-text", -- recommended
         },
     },
@@ -109,6 +109,15 @@ return {
             return adapters
         end,
         main = "neotest",
+    },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "isort", "black" },
+            }
+        }
     },
 
     {
@@ -273,10 +282,10 @@ return {
                             -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                             -- can also be a function to dynamically calculate max width such as
                             -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-                            menu = 50,            -- leading text (labelDetails)
-                            abbr = 50,            -- actual suggestion item
+                            menu = 50, -- leading text (labelDetails)
+                            abbr = 50, -- actual suggestion item
                         },
-                        ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                         show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
                         -- The function below will be called before any actual modifications from lspkind
